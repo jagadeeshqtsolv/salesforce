@@ -23,7 +23,7 @@ test('Create Lead with mandatory fields — verify default status and redirect',
     await leadNewPage.expectLastNameVisible();
   });
 
-  const uniqueSuffix = ` ${Date.now()}`;
+  const uniqueSuffix = ` ${Math.random().toString(36).slice(2, 8)}`;
 
   await test.step('Fill — Enter Last Name (mandatory)', async () => {
     await leadNewPage.fillLastName(testData.createLeadWithMandatoryFieldsVerifyDefaultStatusAndRedirect.enterLastNameMandatory + uniqueSuffix);
@@ -103,7 +103,7 @@ test('Open New Lead form — mandatory fields and Save button visible', { tag: [
       await leadPipelineInspectionPage.clickNew();
     });
 
-    const uniqueSuffix = ` ${Date.now()}`;
+    const uniqueSuffix = ` ${Math.random().toString(36).slice(2, 8)}`;
 
     await test.step('Fill — Enter First Name (optional)', async () => {
       await leadNewPage.fillFirstName(testData.createLeadWithOptionalFieldsValuesPersistOnRecordPage.enterFirstNameOptional);
