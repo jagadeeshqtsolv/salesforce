@@ -23,12 +23,14 @@ test('Create Lead with mandatory fields — verify default status and redirect',
     await leadNewPage.expectLastNameVisible();
   });
 
+  const uniqueSuffix = ` ${Date.now()}`;
+
   await test.step('Fill — Enter Last Name (mandatory)', async () => {
-    await leadNewPage.fillLastName(testData.createLeadWithMandatoryFieldsVerifyDefaultStatusAndRedirect.enterLastNameMandatory);
+    await leadNewPage.fillLastName(testData.createLeadWithMandatoryFieldsVerifyDefaultStatusAndRedirect.enterLastNameMandatory + uniqueSuffix);
   });
 
   await test.step('Fill — Enter Company (mandatory)', async () => {
-    await leadNewPage.fillCompany(testData.createLeadWithMandatoryFieldsVerifyDefaultStatusAndRedirect.enterCompanyMandatory);
+    await leadNewPage.fillCompany(testData.createLeadWithMandatoryFieldsVerifyDefaultStatusAndRedirect.enterCompanyMandatory + uniqueSuffix);
   });
 
   await test.step('Click — Save Lead', async () => {
@@ -36,14 +38,13 @@ test('Create Lead with mandatory fields — verify default status and redirect',
   });
 
   await test.step('Assert contains — Verify redirected to Lead record page with header showing lead name', async () => {
-    await leadRecordPage.expectRecordHeaderContainsText(testData.createLeadWithMandatoryFieldsVerifyDefaultStatusAndRedirect.enterLastNameMandatory);
+    await leadRecordPage.expectRecordHeaderContainsText(testData.createLeadWithMandatoryFieldsVerifyDefaultStatusAndRedirect.enterLastNameMandatory + uniqueSuffix);
   });
 
   await test.step('Assert contains — Verify default Lead Status is \'Open - Not Contacted\' on record page', async () => {
     await leadRecordPage.expectLeadStatusContainsText('Open - Not Contacted');
   });
 });
-
 
 test('Navigate to Leads tab — list view loads and New button visible', { tag: ["@functional","@regression","@P1","@case-f5fbdfd6-f717-4a8f-b947-778a7baf0bb2"] }, async ({ page, homePage, leadPipelineInspectionPage }) => {
   await test.step('Open — Open Salesforce org base URL', async () => {
@@ -62,7 +63,6 @@ test('Navigate to Leads tab — list view loads and New button visible', { tag: 
     await leadPipelineInspectionPage.expectNewVisible();
   });
 });
-
 
 test('Open New Lead form — mandatory fields and Save button visible', { tag: ["@functional","@regression","@P1","@case-95888669-6a7b-4f3d-9cae-1472f41f825a"] }, async ({ page, homePage, leadPipelineInspectionPage, leadNewPage }) => {
   await test.step('Open — Open Salesforce org base URL', async () => {
@@ -103,16 +103,18 @@ test('Open New Lead form — mandatory fields and Save button visible', { tag: [
       await leadPipelineInspectionPage.clickNew();
     });
 
+    const uniqueSuffix = ` ${Date.now()}`;
+
     await test.step('Fill — Enter First Name (optional)', async () => {
       await leadNewPage.fillFirstName(testData.createLeadWithOptionalFieldsValuesPersistOnRecordPage.enterFirstNameOptional);
     });
 
     await test.step('Fill — Enter Last Name (mandatory)', async () => {
-      await leadNewPage.fillLastName(testData.createLeadWithOptionalFieldsValuesPersistOnRecordPage.enterLastNameMandatory);
+      await leadNewPage.fillLastName(testData.createLeadWithOptionalFieldsValuesPersistOnRecordPage.enterLastNameMandatory + uniqueSuffix);
     });
 
     await test.step('Fill — Enter Company (mandatory)', async () => {
-      await leadNewPage.fillCompany(testData.createLeadWithOptionalFieldsValuesPersistOnRecordPage.enterCompanyMandatory);
+      await leadNewPage.fillCompany(testData.createLeadWithOptionalFieldsValuesPersistOnRecordPage.enterCompanyMandatory + uniqueSuffix);
     });
 
     await test.step('Fill — Enter Phone (optional)', async () => {
@@ -124,7 +126,7 @@ test('Open New Lead form — mandatory fields and Save button visible', { tag: [
     });
 
     await test.step('Assert contains — Verify record header shows full name', async () => {
-      const fullName = `${testData.createLeadWithOptionalFieldsValuesPersistOnRecordPage.enterFirstNameOptional} ${testData.createLeadWithOptionalFieldsValuesPersistOnRecordPage.enterLastNameMandatory}`;
+      const fullName = `${testData.createLeadWithOptionalFieldsValuesPersistOnRecordPage.enterFirstNameOptional} ${testData.createLeadWithOptionalFieldsValuesPersistOnRecordPage.enterLastNameMandatory}${uniqueSuffix}`;
       await leadRecordPage.expectRecordHeaderTitleContainsText(fullName);
     });
 
