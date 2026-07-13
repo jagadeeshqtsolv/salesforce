@@ -89,3 +89,46 @@ test('Open New Lead form — mandatory fields and Save button visible', { tag: [
     await leadNewPage.expectSaveEditVisible();
   });
 });
+
+  test('Create Lead with optional fields — values persist on record page', { tag: ["@functional","@regression","@P1","@case-07b3fc8d-18e6-4733-a506-8d4ce235f987"] }, async ({ page, homePage, leadPipelineInspectionPage, leadNewPage, leadRecordPage }) => {
+    await test.step('Open — Open Salesforce org base URL', async () => {
+      await page.goto(env.baseURL);
+    });
+
+    await test.step('Click — Navigate to Leads tab from Home', async () => {
+      await homePage.clickLeads();
+    });
+
+    await test.step('Click — Click New to open New Lead form', async () => {
+      await leadPipelineInspectionPage.clickNew();
+    });
+
+    await test.step('Fill — Enter First Name (optional)', async () => {
+      await leadNewPage.fillFirstName(testData.createLeadWithOptionalFieldsValuesPersistOnRecordPage.enterFirstNameOptional);
+    });
+
+    await test.step('Fill — Enter Last Name (mandatory)', async () => {
+      await leadNewPage.fillLastName(testData.createLeadWithOptionalFieldsValuesPersistOnRecordPage.enterLastNameMandatory);
+    });
+
+    await test.step('Fill — Enter Company (mandatory)', async () => {
+      await leadNewPage.fillCompany(testData.createLeadWithOptionalFieldsValuesPersistOnRecordPage.enterCompanyMandatory);
+    });
+
+    await test.step('Fill — Enter Phone (optional)', async () => {
+      await leadNewPage.fillPhone(testData.createLeadWithOptionalFieldsValuesPersistOnRecordPage.enterPhoneOptional);
+    });
+
+    await test.step('Click — Save Lead', async () => {
+      await leadNewPage.clickSaveEdit();
+    });
+
+    await test.step('Assert contains — Verify record header shows full name', async () => {
+      const fullName = `${testData.createLeadWithOptionalFieldsValuesPersistOnRecordPage.enterFirstNameOptional} ${testData.createLeadWithOptionalFieldsValuesPersistOnRecordPage.enterLastNameMandatory}`;
+      await leadRecordPage.expectRecordHeaderTitleContainsText(fullName);
+    });
+
+    await test.step('Assert contains — Verify Phone field value persisted', async () => {
+      await leadRecordPage.expectPhoneValueContainsText(testData.createLeadWithOptionalFieldsValuesPersistOnRecordPage.enterPhoneOptional);
+    });
+  });
