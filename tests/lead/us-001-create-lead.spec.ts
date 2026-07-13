@@ -43,3 +43,49 @@ test('Create Lead with mandatory fields — verify default status and redirect',
     await leadRecordPage.expectLeadStatusContainsText('Open - Not Contacted');
   });
 });
+
+
+test('Navigate to Leads tab — list view loads and New button visible', { tag: ["@functional","@regression","@P1","@case-f5fbdfd6-f717-4a8f-b947-778a7baf0bb2"] }, async ({ page, homePage, leadPipelineInspectionPage }) => {
+  await test.step('Open — Open Salesforce org base URL', async () => {
+    await page.goto(env.baseURL);
+  });
+
+  await test.step('Click — Navigate to Leads tab from Home', async () => {
+    await homePage.clickLeads();
+  });
+
+  await test.step("Assert visible — Verify Leads list 'My Leads' is visible", async () => {
+    await leadPipelineInspectionPage.expectMyLeadsVisible();
+  });
+
+  await test.step('Assert visible — Verify New button is visible on Leads list view', async () => {
+    await leadPipelineInspectionPage.expectNewVisible();
+  });
+});
+
+
+test('Open New Lead form — mandatory fields and Save button visible', { tag: ["@functional","@regression","@P1","@case-95888669-6a7b-4f3d-9cae-1472f41f825a"] }, async ({ page, homePage, leadPipelineInspectionPage, leadNewPage }) => {
+  await test.step('Open — Open Salesforce org base URL', async () => {
+    await page.goto(env.baseURL);
+  });
+
+  await test.step('Click — Navigate to Leads tab from Home', async () => {
+    await homePage.clickLeads();
+  });
+
+  await test.step('Click — Click New to open New Lead form', async () => {
+    await leadPipelineInspectionPage.clickNew();
+  });
+
+  await test.step('Assert visible — Verify Last Name field is visible (mandatory)', async () => {
+    await leadNewPage.expectLastNameVisible();
+  });
+
+  await test.step('Assert visible — Verify Company field is visible (mandatory)', async () => {
+    await leadNewPage.expectCompanyVisible();
+  });
+
+  await test.step('Assert visible — Verify Save button is visible', async () => {
+    await leadNewPage.expectSaveEditVisible();
+  });
+});
