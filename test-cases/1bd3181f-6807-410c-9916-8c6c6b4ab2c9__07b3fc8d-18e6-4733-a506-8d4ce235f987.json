@@ -1,0 +1,94 @@
+{
+  "id": "07b3fc8d-18e6-4733-a506-8d4ce235f987",
+  "testPlanId": "1bd3181f-6807-410c-9916-8c6c6b4ab2c9",
+  "requirementId": "6981de5b-d86a-4122-8612-3587f2774a26",
+  "suiteName": "US-001 — Create Lead",
+  "case": {
+    "id": "07b3fc8d-18e6-4733-a506-8d4ce235f987",
+    "title": "Create Lead with optional fields — values persist on record page",
+    "priority": "P1",
+    "platforms": [
+      "chrome"
+    ],
+    "preconditions": [],
+    "steps": [
+      {
+        "id": "s1",
+        "action": "openUrl",
+        "targetDescription": "Open Salesforce org base URL",
+        "value": "https://orgfarm-cdb7bbd1fc-dev-ed.develop.my.salesforce.com"
+      },
+      {
+        "id": "s2",
+        "action": "tap",
+        "targetDescription": "Navigate to Leads tab from Home",
+        "screenName": "HomePage",
+        "pageObjectMethod": "clickLeads"
+      },
+      {
+        "id": "s3",
+        "action": "tap",
+        "targetDescription": "Click New to open New Lead form",
+        "screenName": "LeadPipelineInspectionPage",
+        "pageObjectMethod": "clickNew"
+      },
+      {
+        "id": "s4",
+        "action": "fill",
+        "targetDescription": "Enter First Name (optional)",
+        "screenName": "LeadNewPage",
+        "pageObjectMethod": "fillFirstName",
+        "value": "John"
+      },
+      {
+        "id": "s5",
+        "action": "fill",
+        "targetDescription": "Enter Last Name (mandatory)",
+        "screenName": "LeadNewPage",
+        "pageObjectMethod": "fillLastName",
+        "value": "Smith"
+      },
+      {
+        "id": "s6",
+        "action": "fill",
+        "targetDescription": "Enter Company (mandatory)",
+        "screenName": "LeadNewPage",
+        "pageObjectMethod": "fillCompany",
+        "value": "ABC Technologies"
+      },
+      {
+        "id": "s7",
+        "action": "fill",
+        "targetDescription": "Enter Phone (optional)",
+        "screenName": "LeadNewPage",
+        "pageObjectMethod": "fillPhone",
+        "value": "9989876789"
+      },
+      {
+        "id": "s8",
+        "action": "tap",
+        "targetDescription": "Save Lead",
+        "screenName": "LeadNewPage",
+        "pageObjectMethod": "clickSaveEdit"
+      },
+      {
+        "id": "s9",
+        "action": "assertContainsText",
+        "targetDescription": "Verify record header shows full name",
+        "locatorHint": "records-lwc-detail-panel h1.slds-page-header__title",
+        "assertion": "John Smith"
+      },
+      {
+        "id": "s10",
+        "action": "assertContainsText",
+        "targetDescription": "Verify Phone field value persisted",
+        "locatorHint": "[data-field='Phone'], lightning-formatted-phone, .record-layout .slds-grid .slds-truncate[title='9989876789']",
+        "assertion": "9989876789"
+      }
+    ],
+    "tags": [
+      "@functional",
+      "@regression"
+    ]
+  }
+}

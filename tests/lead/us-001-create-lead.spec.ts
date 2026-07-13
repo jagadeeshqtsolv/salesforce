@@ -1,0 +1,45 @@
+import { test, expect } from '@support/fixtures';
+import env from '@support/env';
+import testData from '@testdata/test-data.json';
+
+test('Create Lead with mandatory fields — verify default status and redirect', { tag: ["@smoke","@functional","@regression","@P0","@case-4b7ea150-4eb4-4d40-8e0f-6ae37951a74a"] }, async ({ page, homePage, leadPipelineInspectionPage, leadNewPage, leadRecordPage }) => {
+  await test.step('Open — Open Salesforce org base URL', async () => {
+    await page.goto('https://orgfarm-cdb7bbd1fc-dev-ed.develop.my.salesforce.com');
+  });
+
+  await test.step('Click — Navigate to Leads tab from Home', async () => {
+    await homePage.clickLeads();
+  });
+
+  await test.step('Assert visible — Verify Leads list view is visible (New button present)', async () => {
+    await leadPipelineInspectionPage.expectNewVisible();
+  });
+
+  await test.step('Click — Click New to open New Lead form', async () => {
+    await leadPipelineInspectionPage.clickNew();
+  });
+
+  await test.step('Assert visible — Verify Last Name field is visible on New Lead form', async () => {
+    await leadNewPage.expectLastNameVisible();
+  });
+
+  await test.step('Fill — Enter Last Name (mandatory)', async () => {
+    await leadNewPage.fillLastName(testData.createLeadWithMandatoryFieldsVerifyDefaultStatusAndRedirect.enterLastNameMandatory);
+  });
+
+  await test.step('Fill — Enter Company (mandatory)', async () => {
+    await leadNewPage.fillCompany(testData.createLeadWithMandatoryFieldsVerifyDefaultStatusAndRedirect.enterCompanyMandatory);
+  });
+
+  await test.step('Click — Save Lead', async () => {
+    await leadNewPage.clickSaveEdit();
+  });
+
+  await test.step('Assert contains — Verify redirected to Lead record page with header showing lead name', async () => {
+    await leadRecordPage.expectRecordHeaderContainsText(testData.createLeadWithMandatoryFieldsVerifyDefaultStatusAndRedirect.enterLastNameMandatory);
+  });
+
+  await test.step('Assert contains — Verify default Lead Status is \'Open - Not Contacted\' on record page', async () => {
+    await leadRecordPage.expectLeadStatusContainsText('Open - Not Contacted');
+  });
+});

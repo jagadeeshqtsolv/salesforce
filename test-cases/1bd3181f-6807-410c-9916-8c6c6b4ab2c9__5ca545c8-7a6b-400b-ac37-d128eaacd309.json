@@ -1,0 +1,82 @@
+{
+  "id": "5ca545c8-7a6b-400b-ac37-d128eaacd309",
+  "testPlanId": "1bd3181f-6807-410c-9916-8c6c6b4ab2c9",
+  "requirementId": "6981de5b-d86a-4122-8612-3587f2774a26",
+  "suiteName": "US-001 — Create Lead",
+  "case": {
+    "id": "5ca545c8-7a6b-400b-ac37-d128eaacd309",
+    "title": "Validation errors when both Last Name and Company are blank",
+    "priority": "P1",
+    "platforms": [
+      "chrome"
+    ],
+    "preconditions": [],
+    "steps": [
+      {
+        "id": "s1",
+        "action": "openUrl",
+        "targetDescription": "Open Salesforce org base URL",
+        "value": "https://orgfarm-cdb7bbd1fc-dev-ed.develop.my.salesforce.com"
+      },
+      {
+        "id": "s2",
+        "action": "tap",
+        "targetDescription": "Navigate to Leads tab from Home",
+        "screenName": "HomePage",
+        "pageObjectMethod": "clickLeads"
+      },
+      {
+        "id": "s3",
+        "action": "tap",
+        "targetDescription": "Click New to open New Lead form",
+        "screenName": "LeadPipelineInspectionPage",
+        "pageObjectMethod": "clickNew"
+      },
+      {
+        "id": "s4",
+        "action": "clear",
+        "targetDescription": "Ensure Last Name is blank",
+        "screenName": "LeadNewPage",
+        "pageObjectMethod": "clearLastName"
+      },
+      {
+        "id": "s5",
+        "action": "clear",
+        "targetDescription": "Ensure Company is blank",
+        "screenName": "LeadNewPage",
+        "pageObjectMethod": "clearCompany"
+      },
+      {
+        "id": "s6",
+        "action": "tap",
+        "targetDescription": "Attempt to Save with both mandatory fields blank",
+        "screenName": "LeadNewPage",
+        "pageObjectMethod": "clickSaveEdit"
+      },
+      {
+        "id": "s7",
+        "action": "assertContainsText",
+        "targetDescription": "Verify error banner is shown",
+        "locatorHint": "div[role='alert'], div[role='alertdialog']",
+        "assertion": "Review the errors"
+      },
+      {
+        "id": "s8",
+        "action": "assertCount",
+        "targetDescription": "Verify two field-level error messages are displayed",
+        "locatorHint": ".slds-form-element__help"
+      },
+      {
+        "id": "s9",
+        "action": "assertVisible",
+        "targetDescription": "Confirm still on New Lead form",
+        "screenName": "LeadNewPage",
+        "pageObjectMethod": "expectSaveEditVisible"
+      }
+    ],
+    "tags": [
+      "@negative",
+      "@regression"
+    ]
+  }
+}
