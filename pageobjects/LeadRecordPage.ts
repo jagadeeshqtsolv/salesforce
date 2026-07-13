@@ -168,4 +168,12 @@ export class LeadRecordPage {
     await scrollIntoViewWhenVisible(webLocator(this.page, LeadRecordPage.L.leadStatusValue));
   }
 
+  async expectRecordHeaderContainsText(substring: string, timeoutMs = 30_000): Promise<void> {
+    await expectContainsText(webLocator(this.page, LeadRecordPage.L.recordHeaderTitle), substring, timeoutMs);
+  }
+
+  async expectLeadStatusContainsText(substring: string, timeoutMs = 30_000): Promise<void> {
+    await expectContainsText(webLocator(this.page, LeadRecordPage.L.leadStatusValue), substring, timeoutMs);
+  }
+
 }
