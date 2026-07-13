@@ -1,0 +1,77 @@
+{
+  "id": "ddb902b9-08ef-406a-b147-9113ad089f3c",
+  "testPlanId": "d7bb61af-f025-45ed-b8d3-8b6fc053f5ea",
+  "requirementId": "b29d5d27-2fbc-4516-a096-4e6d566026b4",
+  "suiteName": "[SCRUM-6] US-001 — Create Lead — Edge Cases",
+  "case": {
+    "id": "ddb902b9-08ef-406a-b147-9113ad089f3c",
+    "title": "Validation error when Company is empty",
+    "priority": "P0",
+    "platforms": [
+      "chrome"
+    ],
+    "preconditions": [],
+    "steps": [
+      {
+        "id": "s1",
+        "action": "openUrl",
+        "targetDescription": "Open app home",
+        "value": "/"
+      },
+      {
+        "id": "s2",
+        "action": "tap",
+        "targetDescription": "Go to Leads tab",
+        "screenName": "HomePage",
+        "pageObjectMethod": "clickLeads"
+      },
+      {
+        "id": "s3",
+        "action": "assertVisible",
+        "targetDescription": "Leads list visible",
+        "screenName": "LeadPipelineInspectionPage",
+        "pageObjectMethod": "expectNewVisible"
+      },
+      {
+        "id": "s4",
+        "action": "tap",
+        "targetDescription": "Click New",
+        "screenName": "LeadPipelineInspectionPage",
+        "pageObjectMethod": "clickNew"
+      },
+      {
+        "id": "s5",
+        "action": "fill",
+        "targetDescription": "Enter Last Name (required)",
+        "screenName": "LeadNewPage",
+        "pageObjectMethod": "fillLastName",
+        "value": "Smith"
+      },
+      {
+        "id": "s6",
+        "action": "tap",
+        "targetDescription": "Click Save",
+        "screenName": "LeadNewPage",
+        "pageObjectMethod": "clickSaveEdit"
+      },
+      {
+        "id": "s7",
+        "action": "assertContainsText",
+        "targetDescription": "Field-level error for Company",
+        "locatorHint": "text=Complete this field.",
+        "assertion": "Complete this field."
+      },
+      {
+        "id": "s8",
+        "action": "assertVisible",
+        "targetDescription": "Still on New Lead form",
+        "screenName": "LeadNewPage",
+        "pageObjectMethod": "expectCompanyVisible"
+      }
+    ],
+    "tags": [
+      "@edgecase",
+      "@regression"
+    ]
+  }
+}

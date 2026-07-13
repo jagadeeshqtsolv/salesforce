@@ -1,0 +1,80 @@
+{
+  "id": "15752b70-52d6-494a-ad81-4324bd5be53c",
+  "testPlanId": "d7bb61af-f025-45ed-b8d3-8b6fc053f5ea",
+  "requirementId": "b29d5d27-2fbc-4516-a096-4e6d566026b4",
+  "suiteName": "[SCRUM-6] US-001 — Create Lead — Edge Cases",
+  "case": {
+    "id": "15752b70-52d6-494a-ad81-4324bd5be53c",
+    "title": "Company maximum length boundary (255 chars) accepted",
+    "priority": "P1",
+    "platforms": [
+      "chrome"
+    ],
+    "preconditions": [],
+    "steps": [
+      {
+        "id": "s1",
+        "action": "openUrl",
+        "targetDescription": "Open app home",
+        "value": "/"
+      },
+      {
+        "id": "s2",
+        "action": "tap",
+        "targetDescription": "Go to Leads tab",
+        "screenName": "HomePage",
+        "pageObjectMethod": "clickLeads"
+      },
+      {
+        "id": "s3",
+        "action": "tap",
+        "targetDescription": "Click New",
+        "screenName": "LeadPipelineInspectionPage",
+        "pageObjectMethod": "clickNew"
+      },
+      {
+        "id": "s4",
+        "action": "fill",
+        "targetDescription": "Enter Last Name",
+        "screenName": "LeadNewPage",
+        "pageObjectMethod": "fillLastName",
+        "value": "Smith"
+      },
+      {
+        "id": "s5",
+        "action": "fill",
+        "targetDescription": "Enter 255-char Company",
+        "screenName": "LeadNewPage",
+        "pageObjectMethod": "fillCompany",
+        "value": "CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC"
+      },
+      {
+        "id": "s6",
+        "action": "assertValue",
+        "targetDescription": "Company value equals 255 chars",
+        "screenName": "LeadNewPage",
+        "pageObjectMethod": "expectCompanyValue",
+        "assertion": "CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC"
+      },
+      {
+        "id": "s7",
+        "action": "tap",
+        "targetDescription": "Save Lead",
+        "screenName": "LeadNewPage",
+        "pageObjectMethod": "clickSaveEdit"
+      },
+      {
+        "id": "s8",
+        "action": "assertContainsText",
+        "targetDescription": "Default status applied",
+        "screenName": "LeadRecordPage",
+        "pageObjectMethod": "expectLeadStatusContainsText",
+        "assertion": "Open - Not Contacted"
+      }
+    ],
+    "tags": [
+      "@edgecase",
+      "@regression"
+    ]
+  }
+}

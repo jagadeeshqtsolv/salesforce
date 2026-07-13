@@ -1,0 +1,80 @@
+{
+  "id": "5c1c4633-1177-4b1a-9d1b-f3e5f1882383",
+  "testPlanId": "d7bb61af-f025-45ed-b8d3-8b6fc053f5ea",
+  "requirementId": "b29d5d27-2fbc-4516-a096-4e6d566026b4",
+  "suiteName": "[SCRUM-6] US-001 — Create Lead — Edge Cases",
+  "case": {
+    "id": "5c1c4633-1177-4b1a-9d1b-f3e5f1882383",
+    "title": "Last Name exceeding maximum (81 chars) is truncated to 80",
+    "priority": "P1",
+    "platforms": [
+      "chrome"
+    ],
+    "preconditions": [],
+    "steps": [
+      {
+        "id": "s1",
+        "action": "openUrl",
+        "targetDescription": "Open app home",
+        "value": "/"
+      },
+      {
+        "id": "s2",
+        "action": "tap",
+        "targetDescription": "Go to Leads tab",
+        "screenName": "HomePage",
+        "pageObjectMethod": "clickLeads"
+      },
+      {
+        "id": "s3",
+        "action": "tap",
+        "targetDescription": "Click New",
+        "screenName": "LeadPipelineInspectionPage",
+        "pageObjectMethod": "clickNew"
+      },
+      {
+        "id": "s4",
+        "action": "fill",
+        "targetDescription": "Enter 81-char Last Name",
+        "screenName": "LeadNewPage",
+        "pageObjectMethod": "fillLastName",
+        "value": "LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL"
+      },
+      {
+        "id": "s5",
+        "action": "assertValue",
+        "targetDescription": "Last Name truncated to 80",
+        "screenName": "LeadNewPage",
+        "pageObjectMethod": "expectLastNameValue",
+        "assertion": "LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL"
+      },
+      {
+        "id": "s6",
+        "action": "fill",
+        "targetDescription": "Enter Company",
+        "screenName": "LeadNewPage",
+        "pageObjectMethod": "fillCompany",
+        "value": "ABC Technologies"
+      },
+      {
+        "id": "s7",
+        "action": "tap",
+        "targetDescription": "Save Lead",
+        "screenName": "LeadNewPage",
+        "pageObjectMethod": "clickSaveEdit"
+      },
+      {
+        "id": "s8",
+        "action": "assertContainsText",
+        "targetDescription": "Default status applied",
+        "screenName": "LeadRecordPage",
+        "pageObjectMethod": "expectLeadStatusContainsText",
+        "assertion": "Open - Not Contacted"
+      }
+    ],
+    "tags": [
+      "@edgecase",
+      "@regression"
+    ]
+  }
+}

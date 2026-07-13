@@ -1,0 +1,62 @@
+{
+  "id": "8679628d-b75c-402f-b13d-c09c3bb520a4",
+  "testPlanId": "d7bb61af-f025-45ed-b8d3-8b6fc053f5ea",
+  "requirementId": "b29d5d27-2fbc-4516-a096-4e6d566026b4",
+  "suiteName": "[SCRUM-6] US-001 — Create Lead — Edge Cases",
+  "case": {
+    "id": "8679628d-b75c-402f-b13d-c09c3bb520a4",
+    "title": "Save disabled on New Lead when required fields are empty",
+    "priority": "P1",
+    "platforms": [
+      "chrome"
+    ],
+    "preconditions": [],
+    "steps": [
+      {
+        "id": "s1",
+        "action": "openUrl",
+        "targetDescription": "Open app home",
+        "value": "/"
+      },
+      {
+        "id": "s2",
+        "action": "tap",
+        "targetDescription": "Go to Leads tab",
+        "screenName": "HomePage",
+        "pageObjectMethod": "clickLeads"
+      },
+      {
+        "id": "s3",
+        "action": "assertVisible",
+        "targetDescription": "Leads list visible",
+        "screenName": "LeadPipelineInspectionPage",
+        "pageObjectMethod": "expectNewVisible"
+      },
+      {
+        "id": "s4",
+        "action": "tap",
+        "targetDescription": "Click New",
+        "screenName": "LeadPipelineInspectionPage",
+        "pageObjectMethod": "clickNew"
+      },
+      {
+        "id": "s5",
+        "action": "assertVisible",
+        "targetDescription": "Last Name field visible",
+        "screenName": "LeadNewPage",
+        "pageObjectMethod": "expectLastNameVisible"
+      },
+      {
+        "id": "s6",
+        "action": "assertDisabled",
+        "targetDescription": "Save button disabled",
+        "screenName": "LeadNewPage",
+        "pageObjectMethod": "expectSaveEditDisabled"
+      }
+    ],
+    "tags": [
+      "@edgecase",
+      "@regression"
+    ]
+  }
+}

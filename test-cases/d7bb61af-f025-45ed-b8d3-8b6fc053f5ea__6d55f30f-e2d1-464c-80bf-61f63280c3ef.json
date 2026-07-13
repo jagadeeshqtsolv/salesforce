@@ -1,0 +1,71 @@
+{
+  "id": "6d55f30f-e2d1-464c-80bf-61f63280c3ef",
+  "testPlanId": "d7bb61af-f025-45ed-b8d3-8b6fc053f5ea",
+  "requirementId": "b29d5d27-2fbc-4516-a096-4e6d566026b4",
+  "suiteName": "[SCRUM-6] US-001 — Create Lead — Edge Cases",
+  "case": {
+    "id": "6d55f30f-e2d1-464c-80bf-61f63280c3ef",
+    "title": "Validation error when Last Name is whitespace-only",
+    "priority": "P1",
+    "platforms": [
+      "chrome"
+    ],
+    "preconditions": [],
+    "steps": [
+      {
+        "id": "s1",
+        "action": "openUrl",
+        "targetDescription": "Open app home",
+        "value": "/"
+      },
+      {
+        "id": "s2",
+        "action": "tap",
+        "targetDescription": "Go to Leads tab",
+        "screenName": "HomePage",
+        "pageObjectMethod": "clickLeads"
+      },
+      {
+        "id": "s3",
+        "action": "tap",
+        "targetDescription": "Click New",
+        "screenName": "LeadPipelineInspectionPage",
+        "pageObjectMethod": "clickNew"
+      },
+      {
+        "id": "s4",
+        "action": "fill",
+        "targetDescription": "Enter whitespace Last Name",
+        "screenName": "LeadNewPage",
+        "pageObjectMethod": "fillLastName",
+        "value": "  \t  "
+      },
+      {
+        "id": "s5",
+        "action": "fill",
+        "targetDescription": "Enter valid Company",
+        "screenName": "LeadNewPage",
+        "pageObjectMethod": "fillCompany",
+        "value": "ABC"
+      },
+      {
+        "id": "s6",
+        "action": "tap",
+        "targetDescription": "Click Save",
+        "screenName": "LeadNewPage",
+        "pageObjectMethod": "clickSaveEdit"
+      },
+      {
+        "id": "s7",
+        "action": "assertContainsText",
+        "targetDescription": "Field-level error present",
+        "locatorHint": "text=Complete this field.",
+        "assertion": "Complete this field."
+      }
+    ],
+    "tags": [
+      "@edgecase",
+      "@regression"
+    ]
+  }
+}

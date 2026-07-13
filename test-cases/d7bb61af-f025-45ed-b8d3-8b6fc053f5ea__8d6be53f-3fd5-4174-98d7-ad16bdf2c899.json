@@ -1,0 +1,68 @@
+{
+  "id": "8d6be53f-3fd5-4174-98d7-ad16bdf2c899",
+  "testPlanId": "d7bb61af-f025-45ed-b8d3-8b6fc053f5ea",
+  "requirementId": "b29d5d27-2fbc-4516-a096-4e6d566026b4",
+  "suiteName": "[SCRUM-6] US-001 — Create Lead — Edge Cases",
+  "case": {
+    "id": "8d6be53f-3fd5-4174-98d7-ad16bdf2c899",
+    "title": "Validation errors when both Last Name and Company are empty",
+    "priority": "P0",
+    "platforms": [
+      "chrome"
+    ],
+    "preconditions": [],
+    "steps": [
+      {
+        "id": "s1",
+        "action": "openUrl",
+        "targetDescription": "Open app home",
+        "value": "/"
+      },
+      {
+        "id": "s2",
+        "action": "tap",
+        "targetDescription": "Go to Leads tab",
+        "screenName": "HomePage",
+        "pageObjectMethod": "clickLeads"
+      },
+      {
+        "id": "s3",
+        "action": "assertVisible",
+        "targetDescription": "Leads list visible",
+        "screenName": "LeadPipelineInspectionPage",
+        "pageObjectMethod": "expectNewVisible"
+      },
+      {
+        "id": "s4",
+        "action": "tap",
+        "targetDescription": "Click New",
+        "screenName": "LeadPipelineInspectionPage",
+        "pageObjectMethod": "clickNew"
+      },
+      {
+        "id": "s5",
+        "action": "tap",
+        "targetDescription": "Click Save",
+        "screenName": "LeadNewPage",
+        "pageObjectMethod": "clickSaveEdit"
+      },
+      {
+        "id": "s6",
+        "action": "assertCount",
+        "targetDescription": "Two required field errors shown",
+        "locatorHint": "text=Complete this field."
+      },
+      {
+        "id": "s7",
+        "action": "assertVisible",
+        "targetDescription": "Still on New Lead form",
+        "screenName": "LeadNewPage",
+        "pageObjectMethod": "expectSaveEditVisible"
+      }
+    ],
+    "tags": [
+      "@edgecase",
+      "@regression"
+    ]
+  }
+}
