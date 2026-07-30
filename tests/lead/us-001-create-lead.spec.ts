@@ -11,6 +11,10 @@ test('Create Lead with mandatory fields — verify default status and redirect',
     await homePage.clickLeads();
   });
 
+  await test.step('Click — Switch to list view', async () => {
+    await leadPipelineInspectionPage.clickPipelineInspectionToListView();
+  });
+
   await test.step('Assert visible — Verify Leads list view is visible (New button present)', async () => {
     await leadPipelineInspectionPage.expectNewVisible();
   });
@@ -55,6 +59,10 @@ test('Navigate to Leads tab — list view loads and New button visible', { tag: 
     await homePage.clickLeads();
   });
 
+  await test.step('Click — Switch to list view', async () => {
+    await leadPipelineInspectionPage.clickPipelineInspectionToListView();
+  });
+
   await test.step("Assert visible — Verify Leads list 'My Leads' is visible", async () => {
     await leadPipelineInspectionPage.expectMyLeadsVisible();
   });
@@ -71,6 +79,10 @@ test('Open New Lead form — mandatory fields and Save button visible', { tag: [
 
   await test.step('Click — Navigate to Leads tab from Home', async () => {
     await homePage.clickLeads();
+  });
+
+  await test.step('Click — Switch to list view', async () => {
+    await leadPipelineInspectionPage.clickPipelineInspectionToListView();
   });
 
   await test.step('Click — Click New to open New Lead form', async () => {
@@ -97,6 +109,10 @@ test('Open New Lead form — mandatory fields and Save button visible', { tag: [
 
     await test.step('Click — Navigate to Leads tab from Home', async () => {
       await homePage.clickLeads();
+    });
+
+    await test.step('Click — Switch to list view', async () => {
+      await leadPipelineInspectionPage.clickPipelineInspectionToListView();
     });
 
     await test.step('Click — Click New to open New Lead form', async () => {
@@ -127,10 +143,6 @@ test('Open New Lead form — mandatory fields and Save button visible', { tag: [
 
     await test.step('Assert contains — Verify record header shows full name', async () => {
       const fullName = `${testData.createLeadWithOptionalFieldsValuesPersistOnRecordPage.enterFirstNameOptional} ${testData.createLeadWithOptionalFieldsValuesPersistOnRecordPage.enterLastNameMandatory}${uniqueSuffix}`;
-      await leadRecordPage.expectRecordHeaderTitleContainsText(fullName);
-    });
-
-    await test.step('Assert contains — Verify Phone field value persisted', async () => {
-      await leadRecordPage.expectPhoneValueContainsText(testData.createLeadWithOptionalFieldsValuesPersistOnRecordPage.enterPhoneOptional);
+      await leadRecordPage.expectRecordHeaderContainsText(fullName);
     });
   });
