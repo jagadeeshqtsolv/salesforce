@@ -42,8 +42,8 @@ import {
 
 export class LeadRecordPage {
   private static readonly L = {
-    recordHeaderTitle: { strategy: 'css', value: 'records-lwc-detail-panel h1.slds-page-header__title', actionKind: 'generic' as const },
-    leadStatusValue: { strategy: 'css', value: '[data-field="Status"]', actionKind: 'generic' as const }
+    recordHeaderTitle: { strategy: 'css', value: 'h1 lightning-formatted-name', actionKind: 'generic' as const },
+    leadStatusValue: { strategy: 'css', value: '[data-tab-name="Open - Not Contacted"]', actionKind: 'generic' as const }
   } as const;
 
   constructor(private readonly page: Page) {}

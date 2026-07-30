@@ -42,10 +42,10 @@ import {
 
 export class LeadPipelineInspectionPage {
   private static readonly L = {
-    myLeads: { strategy: 'text' as const, value: 'My Leads', shadowHost: 'lst-list-view-picker', actionKind: 'generic' as const },
+    myLeads: { strategy: 'css' as const, value: 'h1 .slds-assistive-text', actionKind: 'generic' as const },
     refresh: { strategy: 'css' as const, value: '[title="Refresh"]', actionKind: 'button' as const },
     inlineEditButton: { strategy: 'css' as const, value: '[title="Edit List"]', shadowHost: 'lightning-button-icon', actionKind: 'button' as const },
-    new: { strategy: 'css' as const, value: 'button[name="New"]', shadowHost: 'lightning-button', actionKind: 'button' as const },
+    new: { strategy: 'css' as const, value: 'a[title="New"]', actionKind: 'button' as const },
     pipelineInspectionToListView: { strategy: 'role' as const, value: 'List View', role: 'button', shadowHost: 'lightning-button', actionKind: 'button' as const },
     massChangeStatus: { strategy: 'css' as const, value: 'button[name="MassChangeStatus"]', shadowHost: 'lightning-button', actionKind: 'button' as const },
     massChangeOwner: { strategy: 'css' as const, value: 'button[name="MassChangeOwner"]', shadowHost: 'lightning-button', actionKind: 'button' as const },
