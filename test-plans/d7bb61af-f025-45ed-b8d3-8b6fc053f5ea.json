@@ -1,0 +1,1152 @@
+{
+  "id": "d7bb61af-f025-45ed-b8d3-8b6fc053f5ea",
+  "requirementId": "b29d5d27-2fbc-4516-a096-4e6d566026b4",
+  "model": "gpt-5",
+  "createdAt": "2026-07-13T10:40:19.803Z",
+  "plan": {
+    "version": 1,
+    "suiteName": "[SCRUM-6] US-001 — Create Lead — Edge Cases",
+    "cases": [
+      {
+        "id": "8679628d-b75c-402f-b13d-c09c3bb520a4",
+        "title": "Save disabled on New Lead when required fields are empty",
+        "priority": "P1",
+        "platforms": [
+          "chrome"
+        ],
+        "preconditions": [],
+        "steps": [
+          {
+            "id": "s1",
+            "action": "openUrl",
+            "targetDescription": "Open app home",
+            "value": "/"
+          },
+          {
+            "id": "s2",
+            "action": "tap",
+            "targetDescription": "Go to Leads tab",
+            "screenName": "HomePage",
+            "pageObjectMethod": "clickLeads"
+          },
+          {
+            "id": "s3",
+            "action": "assertVisible",
+            "targetDescription": "Leads list visible",
+            "screenName": "LeadPipelineInspectionPage",
+            "pageObjectMethod": "expectNewVisible"
+          },
+          {
+            "id": "s4",
+            "action": "tap",
+            "targetDescription": "Click New",
+            "screenName": "LeadPipelineInspectionPage",
+            "pageObjectMethod": "clickNew"
+          },
+          {
+            "id": "s5",
+            "action": "assertVisible",
+            "targetDescription": "Last Name field visible",
+            "screenName": "LeadNewPage",
+            "pageObjectMethod": "expectLastNameVisible"
+          },
+          {
+            "id": "s6",
+            "action": "assertDisabled",
+            "targetDescription": "Save button disabled",
+            "screenName": "LeadNewPage",
+            "pageObjectMethod": "expectSaveEditDisabled"
+          }
+        ],
+        "tags": [
+          "@edgecase",
+          "@regression"
+        ]
+      },
+      {
+        "id": "f9576927-43f4-4081-b1ab-e594ea9b9053",
+        "title": "Validation error when Last Name is empty",
+        "priority": "P0",
+        "platforms": [
+          "chrome"
+        ],
+        "preconditions": [],
+        "steps": [
+          {
+            "id": "s1",
+            "action": "openUrl",
+            "targetDescription": "Open app home",
+            "value": "/"
+          },
+          {
+            "id": "s2",
+            "action": "tap",
+            "targetDescription": "Go to Leads tab",
+            "screenName": "HomePage",
+            "pageObjectMethod": "clickLeads"
+          },
+          {
+            "id": "s3",
+            "action": "assertVisible",
+            "targetDescription": "Leads list visible",
+            "screenName": "LeadPipelineInspectionPage",
+            "pageObjectMethod": "expectNewVisible"
+          },
+          {
+            "id": "s4",
+            "action": "tap",
+            "targetDescription": "Click New",
+            "screenName": "LeadPipelineInspectionPage",
+            "pageObjectMethod": "clickNew"
+          },
+          {
+            "id": "s5",
+            "action": "fill",
+            "targetDescription": "Enter Company (required)",
+            "screenName": "LeadNewPage",
+            "pageObjectMethod": "fillCompany",
+            "value": "ABC Technologies"
+          },
+          {
+            "id": "s6",
+            "action": "tap",
+            "targetDescription": "Click Save",
+            "screenName": "LeadNewPage",
+            "pageObjectMethod": "clickSaveEdit"
+          },
+          {
+            "id": "s7",
+            "action": "assertContainsText",
+            "targetDescription": "Field-level error for Last Name",
+            "locatorHint": "text=Complete this field.",
+            "assertion": "Complete this field."
+          },
+          {
+            "id": "s8",
+            "action": "assertVisible",
+            "targetDescription": "Still on New Lead form",
+            "screenName": "LeadNewPage",
+            "pageObjectMethod": "expectLastNameVisible"
+          }
+        ],
+        "tags": [
+          "@edgecase",
+          "@regression"
+        ]
+      },
+      {
+        "id": "ddb902b9-08ef-406a-b147-9113ad089f3c",
+        "title": "Validation error when Company is empty",
+        "priority": "P0",
+        "platforms": [
+          "chrome"
+        ],
+        "preconditions": [],
+        "steps": [
+          {
+            "id": "s1",
+            "action": "openUrl",
+            "targetDescription": "Open app home",
+            "value": "/"
+          },
+          {
+            "id": "s2",
+            "action": "tap",
+            "targetDescription": "Go to Leads tab",
+            "screenName": "HomePage",
+            "pageObjectMethod": "clickLeads"
+          },
+          {
+            "id": "s3",
+            "action": "assertVisible",
+            "targetDescription": "Leads list visible",
+            "screenName": "LeadPipelineInspectionPage",
+            "pageObjectMethod": "expectNewVisible"
+          },
+          {
+            "id": "s4",
+            "action": "tap",
+            "targetDescription": "Click New",
+            "screenName": "LeadPipelineInspectionPage",
+            "pageObjectMethod": "clickNew"
+          },
+          {
+            "id": "s5",
+            "action": "fill",
+            "targetDescription": "Enter Last Name (required)",
+            "screenName": "LeadNewPage",
+            "pageObjectMethod": "fillLastName",
+            "value": "Smith"
+          },
+          {
+            "id": "s6",
+            "action": "tap",
+            "targetDescription": "Click Save",
+            "screenName": "LeadNewPage",
+            "pageObjectMethod": "clickSaveEdit"
+          },
+          {
+            "id": "s7",
+            "action": "assertContainsText",
+            "targetDescription": "Field-level error for Company",
+            "locatorHint": "text=Complete this field.",
+            "assertion": "Complete this field."
+          },
+          {
+            "id": "s8",
+            "action": "assertVisible",
+            "targetDescription": "Still on New Lead form",
+            "screenName": "LeadNewPage",
+            "pageObjectMethod": "expectCompanyVisible"
+          }
+        ],
+        "tags": [
+          "@edgecase",
+          "@regression"
+        ]
+      },
+      {
+        "id": "8d6be53f-3fd5-4174-98d7-ad16bdf2c899",
+        "title": "Validation errors when both Last Name and Company are empty",
+        "priority": "P0",
+        "platforms": [
+          "chrome"
+        ],
+        "preconditions": [],
+        "steps": [
+          {
+            "id": "s1",
+            "action": "openUrl",
+            "targetDescription": "Open app home",
+            "value": "/"
+          },
+          {
+            "id": "s2",
+            "action": "tap",
+            "targetDescription": "Go to Leads tab",
+            "screenName": "HomePage",
+            "pageObjectMethod": "clickLeads"
+          },
+          {
+            "id": "s3",
+            "action": "assertVisible",
+            "targetDescription": "Leads list visible",
+            "screenName": "LeadPipelineInspectionPage",
+            "pageObjectMethod": "expectNewVisible"
+          },
+          {
+            "id": "s4",
+            "action": "tap",
+            "targetDescription": "Click New",
+            "screenName": "LeadPipelineInspectionPage",
+            "pageObjectMethod": "clickNew"
+          },
+          {
+            "id": "s5",
+            "action": "tap",
+            "targetDescription": "Click Save",
+            "screenName": "LeadNewPage",
+            "pageObjectMethod": "clickSaveEdit"
+          },
+          {
+            "id": "s6",
+            "action": "assertCount",
+            "targetDescription": "Two required field errors shown",
+            "locatorHint": "text=Complete this field."
+          },
+          {
+            "id": "s7",
+            "action": "assertVisible",
+            "targetDescription": "Still on New Lead form",
+            "screenName": "LeadNewPage",
+            "pageObjectMethod": "expectSaveEditVisible"
+          }
+        ],
+        "tags": [
+          "@edgecase",
+          "@regression"
+        ]
+      },
+      {
+        "id": "6d55f30f-e2d1-464c-80bf-61f63280c3ef",
+        "title": "Validation error when Last Name is whitespace-only",
+        "priority": "P1",
+        "platforms": [
+          "chrome"
+        ],
+        "preconditions": [],
+        "steps": [
+          {
+            "id": "s1",
+            "action": "openUrl",
+            "targetDescription": "Open app home",
+            "value": "/"
+          },
+          {
+            "id": "s2",
+            "action": "tap",
+            "targetDescription": "Go to Leads tab",
+            "screenName": "HomePage",
+            "pageObjectMethod": "clickLeads"
+          },
+          {
+            "id": "s3",
+            "action": "tap",
+            "targetDescription": "Click New",
+            "screenName": "LeadPipelineInspectionPage",
+            "pageObjectMethod": "clickNew"
+          },
+          {
+            "id": "s4",
+            "action": "fill",
+            "targetDescription": "Enter whitespace Last Name",
+            "screenName": "LeadNewPage",
+            "pageObjectMethod": "fillLastName",
+            "value": "  \t  "
+          },
+          {
+            "id": "s5",
+            "action": "fill",
+            "targetDescription": "Enter valid Company",
+            "screenName": "LeadNewPage",
+            "pageObjectMethod": "fillCompany",
+            "value": "ABC"
+          },
+          {
+            "id": "s6",
+            "action": "tap",
+            "targetDescription": "Click Save",
+            "screenName": "LeadNewPage",
+            "pageObjectMethod": "clickSaveEdit"
+          },
+          {
+            "id": "s7",
+            "action": "assertContainsText",
+            "targetDescription": "Field-level error present",
+            "locatorHint": "text=Complete this field.",
+            "assertion": "Complete this field."
+          }
+        ],
+        "tags": [
+          "@edgecase",
+          "@regression"
+        ]
+      },
+      {
+        "id": "db771a03-20b8-4002-a981-b736dd7c58be",
+        "title": "Validation error when Company is whitespace-only",
+        "priority": "P1",
+        "platforms": [
+          "chrome"
+        ],
+        "preconditions": [],
+        "steps": [
+          {
+            "id": "s1",
+            "action": "openUrl",
+            "targetDescription": "Open app home",
+            "value": "/"
+          },
+          {
+            "id": "s2",
+            "action": "tap",
+            "targetDescription": "Go to Leads tab",
+            "screenName": "HomePage",
+            "pageObjectMethod": "clickLeads"
+          },
+          {
+            "id": "s3",
+            "action": "tap",
+            "targetDescription": "Click New",
+            "screenName": "LeadPipelineInspectionPage",
+            "pageObjectMethod": "clickNew"
+          },
+          {
+            "id": "s4",
+            "action": "fill",
+            "targetDescription": "Enter valid Last Name",
+            "screenName": "LeadNewPage",
+            "pageObjectMethod": "fillLastName",
+            "value": "Smith"
+          },
+          {
+            "id": "s5",
+            "action": "fill",
+            "targetDescription": "Enter whitespace Company",
+            "screenName": "LeadNewPage",
+            "pageObjectMethod": "fillCompany",
+            "value": "   \n  "
+          },
+          {
+            "id": "s6",
+            "action": "tap",
+            "targetDescription": "Click Save",
+            "screenName": "LeadNewPage",
+            "pageObjectMethod": "clickSaveEdit"
+          },
+          {
+            "id": "s7",
+            "action": "assertContainsText",
+            "targetDescription": "Field-level error present",
+            "locatorHint": "text=Complete this field.",
+            "assertion": "Complete this field."
+          }
+        ],
+        "tags": [
+          "@edgecase",
+          "@regression"
+        ]
+      },
+      {
+        "id": "354c968f-5892-4a8d-9ad8-07812f973229",
+        "title": "Create Lead with minimal valid lengths (1-char Last Name and Company)",
+        "priority": "P0",
+        "platforms": [
+          "chrome"
+        ],
+        "preconditions": [],
+        "steps": [
+          {
+            "id": "s1",
+            "action": "openUrl",
+            "targetDescription": "Open app home",
+            "value": "/"
+          },
+          {
+            "id": "s2",
+            "action": "tap",
+            "targetDescription": "Go to Leads tab",
+            "screenName": "HomePage",
+            "pageObjectMethod": "clickLeads"
+          },
+          {
+            "id": "s3",
+            "action": "tap",
+            "targetDescription": "Click New",
+            "screenName": "LeadPipelineInspectionPage",
+            "pageObjectMethod": "clickNew"
+          },
+          {
+            "id": "s4",
+            "action": "fill",
+            "targetDescription": "Enter 1-char Last Name",
+            "screenName": "LeadNewPage",
+            "pageObjectMethod": "fillLastName",
+            "value": "S"
+          },
+          {
+            "id": "s5",
+            "action": "fill",
+            "targetDescription": "Enter 1-char Company",
+            "screenName": "LeadNewPage",
+            "pageObjectMethod": "fillCompany",
+            "value": "A"
+          },
+          {
+            "id": "s6",
+            "action": "tap",
+            "targetDescription": "Save Lead",
+            "screenName": "LeadNewPage",
+            "pageObjectMethod": "clickSaveEdit"
+          },
+          {
+            "id": "s7",
+            "action": "assertVisible",
+            "targetDescription": "Redirected to Lead record",
+            "screenName": "LeadRecordPage",
+            "pageObjectMethod": "expectRecordHeaderTitleVisible"
+          },
+          {
+            "id": "s8",
+            "action": "assertContainsText",
+            "targetDescription": "Default status applied",
+            "screenName": "LeadRecordPage",
+            "pageObjectMethod": "expectLeadStatusContainsText",
+            "assertion": "Open - Not Contacted"
+          }
+        ],
+        "tags": [
+          "@edgecase",
+          "@regression"
+        ]
+      },
+      {
+        "id": "358211ed-514a-4cc3-88d3-16e6a2da9771",
+        "title": "Create Lead with numeric-only required fields (Last Name='0', Company='1')",
+        "priority": "P2",
+        "platforms": [
+          "chrome"
+        ],
+        "preconditions": [],
+        "steps": [
+          {
+            "id": "s1",
+            "action": "openUrl",
+            "targetDescription": "Open app home",
+            "value": "/"
+          },
+          {
+            "id": "s2",
+            "action": "tap",
+            "targetDescription": "Go to Leads tab",
+            "screenName": "HomePage",
+            "pageObjectMethod": "clickLeads"
+          },
+          {
+            "id": "s3",
+            "action": "tap",
+            "targetDescription": "Click New",
+            "screenName": "LeadPipelineInspectionPage",
+            "pageObjectMethod": "clickNew"
+          },
+          {
+            "id": "s4",
+            "action": "fill",
+            "targetDescription": "Enter Last Name '0'",
+            "screenName": "LeadNewPage",
+            "pageObjectMethod": "fillLastName",
+            "value": "0"
+          },
+          {
+            "id": "s5",
+            "action": "fill",
+            "targetDescription": "Enter Company '1'",
+            "screenName": "LeadNewPage",
+            "pageObjectMethod": "fillCompany",
+            "value": "1"
+          },
+          {
+            "id": "s6",
+            "action": "tap",
+            "targetDescription": "Save Lead",
+            "screenName": "LeadNewPage",
+            "pageObjectMethod": "clickSaveEdit"
+          },
+          {
+            "id": "s7",
+            "action": "assertVisible",
+            "targetDescription": "Redirected to Lead record",
+            "screenName": "LeadRecordPage",
+            "pageObjectMethod": "expectRecordHeaderTitleVisible"
+          },
+          {
+            "id": "s8",
+            "action": "assertContainsText",
+            "targetDescription": "Default status applied",
+            "screenName": "LeadRecordPage",
+            "pageObjectMethod": "expectLeadStatusContainsText",
+            "assertion": "Open - Not Contacted"
+          }
+        ],
+        "tags": [
+          "@edgecase",
+          "@regression"
+        ]
+      },
+      {
+        "id": "a56ce801-a656-4546-94a4-98d764499e4b",
+        "title": "Create Lead with special characters in required fields",
+        "priority": "P1",
+        "platforms": [
+          "chrome"
+        ],
+        "preconditions": [],
+        "steps": [
+          {
+            "id": "s1",
+            "action": "openUrl",
+            "targetDescription": "Open app home",
+            "value": "/"
+          },
+          {
+            "id": "s2",
+            "action": "tap",
+            "targetDescription": "Go to Leads tab",
+            "screenName": "HomePage",
+            "pageObjectMethod": "clickLeads"
+          },
+          {
+            "id": "s3",
+            "action": "tap",
+            "targetDescription": "Click New",
+            "screenName": "LeadPipelineInspectionPage",
+            "pageObjectMethod": "clickNew"
+          },
+          {
+            "id": "s4",
+            "action": "fill",
+            "targetDescription": "Enter special-char Last Name",
+            "screenName": "LeadNewPage",
+            "pageObjectMethod": "fillLastName",
+            "value": "O'Connor-Johnson"
+          },
+          {
+            "id": "s5",
+            "action": "fill",
+            "targetDescription": "Enter special-char Company",
+            "screenName": "LeadNewPage",
+            "pageObjectMethod": "fillCompany",
+            "value": "AT&T \"R&D\" <Dev>"
+          },
+          {
+            "id": "s6",
+            "action": "tap",
+            "targetDescription": "Save Lead",
+            "screenName": "LeadNewPage",
+            "pageObjectMethod": "clickSaveEdit"
+          },
+          {
+            "id": "s7",
+            "action": "assertVisible",
+            "targetDescription": "Redirected to Lead record",
+            "screenName": "LeadRecordPage",
+            "pageObjectMethod": "expectRecordHeaderTitleVisible"
+          },
+          {
+            "id": "s8",
+            "action": "assertContainsText",
+            "targetDescription": "Record header contains Last Name",
+            "screenName": "LeadRecordPage",
+            "pageObjectMethod": "expectRecordHeaderTitleContainsText",
+            "assertion": "O'Connor-Johnson"
+          },
+          {
+            "id": "s9",
+            "action": "assertContainsText",
+            "targetDescription": "Default status applied",
+            "screenName": "LeadRecordPage",
+            "pageObjectMethod": "expectLeadStatusContainsText",
+            "assertion": "Open - Not Contacted"
+          }
+        ],
+        "tags": [
+          "@edgecase",
+          "@regression"
+        ]
+      },
+      {
+        "id": "148853ad-a1d8-4e11-8076-f3772b54e29c",
+        "title": "Create Lead with international characters (Unicode) in required fields",
+        "priority": "P1",
+        "platforms": [
+          "chrome"
+        ],
+        "preconditions": [],
+        "steps": [
+          {
+            "id": "s1",
+            "action": "openUrl",
+            "targetDescription": "Open app home",
+            "value": "/"
+          },
+          {
+            "id": "s2",
+            "action": "tap",
+            "targetDescription": "Go to Leads tab",
+            "screenName": "HomePage",
+            "pageObjectMethod": "clickLeads"
+          },
+          {
+            "id": "s3",
+            "action": "tap",
+            "targetDescription": "Click New",
+            "screenName": "LeadPipelineInspectionPage",
+            "pageObjectMethod": "clickNew"
+          },
+          {
+            "id": "s4",
+            "action": "fill",
+            "targetDescription": "Enter Unicode Last Name",
+            "screenName": "LeadNewPage",
+            "pageObjectMethod": "fillLastName",
+            "value": "李"
+          },
+          {
+            "id": "s5",
+            "action": "fill",
+            "targetDescription": "Enter Unicode Company",
+            "screenName": "LeadNewPage",
+            "pageObjectMethod": "fillCompany",
+            "value": "Müller & Söhne 株式会社"
+          },
+          {
+            "id": "s6",
+            "action": "tap",
+            "targetDescription": "Save Lead",
+            "screenName": "LeadNewPage",
+            "pageObjectMethod": "clickSaveEdit"
+          },
+          {
+            "id": "s7",
+            "action": "assertVisible",
+            "targetDescription": "Redirected to Lead record",
+            "screenName": "LeadRecordPage",
+            "pageObjectMethod": "expectRecordHeaderTitleVisible"
+          },
+          {
+            "id": "s8",
+            "action": "assertContainsText",
+            "targetDescription": "Record header contains Unicode Last Name",
+            "screenName": "LeadRecordPage",
+            "pageObjectMethod": "expectRecordHeaderTitleContainsText",
+            "assertion": "李"
+          },
+          {
+            "id": "s9",
+            "action": "assertContainsText",
+            "targetDescription": "Default status applied",
+            "screenName": "LeadRecordPage",
+            "pageObjectMethod": "expectLeadStatusContainsText",
+            "assertion": "Open - Not Contacted"
+          }
+        ],
+        "tags": [
+          "@edgecase",
+          "@regression"
+        ]
+      },
+      {
+        "id": "21da0f94-12b9-4631-a678-39c4488e6f00",
+        "title": "Last Name maximum length boundary (80 chars) accepted",
+        "priority": "P1",
+        "platforms": [
+          "chrome"
+        ],
+        "preconditions": [],
+        "steps": [
+          {
+            "id": "s1",
+            "action": "openUrl",
+            "targetDescription": "Open app home",
+            "value": "/"
+          },
+          {
+            "id": "s2",
+            "action": "tap",
+            "targetDescription": "Go to Leads tab",
+            "screenName": "HomePage",
+            "pageObjectMethod": "clickLeads"
+          },
+          {
+            "id": "s3",
+            "action": "tap",
+            "targetDescription": "Click New",
+            "screenName": "LeadPipelineInspectionPage",
+            "pageObjectMethod": "clickNew"
+          },
+          {
+            "id": "s4",
+            "action": "fill",
+            "targetDescription": "Enter 80-char Last Name",
+            "screenName": "LeadNewPage",
+            "pageObjectMethod": "fillLastName",
+            "value": "LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL"
+          },
+          {
+            "id": "s5",
+            "action": "assertValue",
+            "targetDescription": "Last Name value equals 80 chars",
+            "screenName": "LeadNewPage",
+            "pageObjectMethod": "expectLastNameValue",
+            "assertion": "LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL"
+          },
+          {
+            "id": "s6",
+            "action": "fill",
+            "targetDescription": "Enter Company",
+            "screenName": "LeadNewPage",
+            "pageObjectMethod": "fillCompany",
+            "value": "ABC Technologies"
+          },
+          {
+            "id": "s7",
+            "action": "tap",
+            "targetDescription": "Save Lead",
+            "screenName": "LeadNewPage",
+            "pageObjectMethod": "clickSaveEdit"
+          },
+          {
+            "id": "s8",
+            "action": "assertContainsText",
+            "targetDescription": "Default status applied",
+            "screenName": "LeadRecordPage",
+            "pageObjectMethod": "expectLeadStatusContainsText",
+            "assertion": "Open - Not Contacted"
+          }
+        ],
+        "tags": [
+          "@edgecase",
+          "@regression"
+        ]
+      },
+      {
+        "id": "5c1c4633-1177-4b1a-9d1b-f3e5f1882383",
+        "title": "Last Name exceeding maximum (81 chars) is truncated to 80",
+        "priority": "P1",
+        "platforms": [
+          "chrome"
+        ],
+        "preconditions": [],
+        "steps": [
+          {
+            "id": "s1",
+            "action": "openUrl",
+            "targetDescription": "Open app home",
+            "value": "/"
+          },
+          {
+            "id": "s2",
+            "action": "tap",
+            "targetDescription": "Go to Leads tab",
+            "screenName": "HomePage",
+            "pageObjectMethod": "clickLeads"
+          },
+          {
+            "id": "s3",
+            "action": "tap",
+            "targetDescription": "Click New",
+            "screenName": "LeadPipelineInspectionPage",
+            "pageObjectMethod": "clickNew"
+          },
+          {
+            "id": "s4",
+            "action": "fill",
+            "targetDescription": "Enter 81-char Last Name",
+            "screenName": "LeadNewPage",
+            "pageObjectMethod": "fillLastName",
+            "value": "LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL"
+          },
+          {
+            "id": "s5",
+            "action": "assertValue",
+            "targetDescription": "Last Name truncated to 80",
+            "screenName": "LeadNewPage",
+            "pageObjectMethod": "expectLastNameValue",
+            "assertion": "LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL"
+          },
+          {
+            "id": "s6",
+            "action": "fill",
+            "targetDescription": "Enter Company",
+            "screenName": "LeadNewPage",
+            "pageObjectMethod": "fillCompany",
+            "value": "ABC Technologies"
+          },
+          {
+            "id": "s7",
+            "action": "tap",
+            "targetDescription": "Save Lead",
+            "screenName": "LeadNewPage",
+            "pageObjectMethod": "clickSaveEdit"
+          },
+          {
+            "id": "s8",
+            "action": "assertContainsText",
+            "targetDescription": "Default status applied",
+            "screenName": "LeadRecordPage",
+            "pageObjectMethod": "expectLeadStatusContainsText",
+            "assertion": "Open - Not Contacted"
+          }
+        ],
+        "tags": [
+          "@edgecase",
+          "@regression"
+        ]
+      },
+      {
+        "id": "15752b70-52d6-494a-ad81-4324bd5be53c",
+        "title": "Company maximum length boundary (255 chars) accepted",
+        "priority": "P1",
+        "platforms": [
+          "chrome"
+        ],
+        "preconditions": [],
+        "steps": [
+          {
+            "id": "s1",
+            "action": "openUrl",
+            "targetDescription": "Open app home",
+            "value": "/"
+          },
+          {
+            "id": "s2",
+            "action": "tap",
+            "targetDescription": "Go to Leads tab",
+            "screenName": "HomePage",
+            "pageObjectMethod": "clickLeads"
+          },
+          {
+            "id": "s3",
+            "action": "tap",
+            "targetDescription": "Click New",
+            "screenName": "LeadPipelineInspectionPage",
+            "pageObjectMethod": "clickNew"
+          },
+          {
+            "id": "s4",
+            "action": "fill",
+            "targetDescription": "Enter Last Name",
+            "screenName": "LeadNewPage",
+            "pageObjectMethod": "fillLastName",
+            "value": "Smith"
+          },
+          {
+            "id": "s5",
+            "action": "fill",
+            "targetDescription": "Enter 255-char Company",
+            "screenName": "LeadNewPage",
+            "pageObjectMethod": "fillCompany",
+            "value": "CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC"
+          },
+          {
+            "id": "s6",
+            "action": "assertValue",
+            "targetDescription": "Company value equals 255 chars",
+            "screenName": "LeadNewPage",
+            "pageObjectMethod": "expectCompanyValue",
+            "assertion": "CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC"
+          },
+          {
+            "id": "s7",
+            "action": "tap",
+            "targetDescription": "Save Lead",
+            "screenName": "LeadNewPage",
+            "pageObjectMethod": "clickSaveEdit"
+          },
+          {
+            "id": "s8",
+            "action": "assertContainsText",
+            "targetDescription": "Default status applied",
+            "screenName": "LeadRecordPage",
+            "pageObjectMethod": "expectLeadStatusContainsText",
+            "assertion": "Open - Not Contacted"
+          }
+        ],
+        "tags": [
+          "@edgecase",
+          "@regression"
+        ]
+      },
+      {
+        "id": "287d79da-0158-41ea-8bb3-db6adbe55dba",
+        "title": "Company exceeding maximum (256 chars) is truncated to 255",
+        "priority": "P1",
+        "platforms": [
+          "chrome"
+        ],
+        "preconditions": [],
+        "steps": [
+          {
+            "id": "s1",
+            "action": "openUrl",
+            "targetDescription": "Open app home",
+            "value": "/"
+          },
+          {
+            "id": "s2",
+            "action": "tap",
+            "targetDescription": "Go to Leads tab",
+            "screenName": "HomePage",
+            "pageObjectMethod": "clickLeads"
+          },
+          {
+            "id": "s3",
+            "action": "tap",
+            "targetDescription": "Click New",
+            "screenName": "LeadPipelineInspectionPage",
+            "pageObjectMethod": "clickNew"
+          },
+          {
+            "id": "s4",
+            "action": "fill",
+            "targetDescription": "Enter Last Name",
+            "screenName": "LeadNewPage",
+            "pageObjectMethod": "fillLastName",
+            "value": "Smith"
+          },
+          {
+            "id": "s5",
+            "action": "fill",
+            "targetDescription": "Enter 256-char Company",
+            "screenName": "LeadNewPage",
+            "pageObjectMethod": "fillCompany",
+            "value": "CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC"
+          },
+          {
+            "id": "s6",
+            "action": "assertValue",
+            "targetDescription": "Company truncated to 255",
+            "screenName": "LeadNewPage",
+            "pageObjectMethod": "expectCompanyValue",
+            "assertion": "CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC"
+          },
+          {
+            "id": "s7",
+            "action": "tap",
+            "targetDescription": "Save Lead",
+            "screenName": "LeadNewPage",
+            "pageObjectMethod": "clickSaveEdit"
+          },
+          {
+            "id": "s8",
+            "action": "assertContainsText",
+            "targetDescription": "Default status applied",
+            "screenName": "LeadRecordPage",
+            "pageObjectMethod": "expectLeadStatusContainsText",
+            "assertion": "Open - Not Contacted"
+          }
+        ],
+        "tags": [
+          "@edgecase",
+          "@regression"
+        ]
+      },
+      {
+        "id": "f6487c08-94cb-4b19-b773-2844375e68c3",
+        "title": "Required fields with leading/trailing spaces are accepted (trimmed) and default status set",
+        "priority": "P1",
+        "platforms": [
+          "chrome"
+        ],
+        "preconditions": [],
+        "steps": [
+          {
+            "id": "s1",
+            "action": "openUrl",
+            "targetDescription": "Open app home",
+            "value": "/"
+          },
+          {
+            "id": "s2",
+            "action": "tap",
+            "targetDescription": "Go to Leads tab",
+            "screenName": "HomePage",
+            "pageObjectMethod": "clickLeads"
+          },
+          {
+            "id": "s3",
+            "action": "tap",
+            "targetDescription": "Click New",
+            "screenName": "LeadPipelineInspectionPage",
+            "pageObjectMethod": "clickNew"
+          },
+          {
+            "id": "s4",
+            "action": "fill",
+            "targetDescription": "Enter Last Name with spaces",
+            "screenName": "LeadNewPage",
+            "pageObjectMethod": "fillLastName",
+            "value": "  Smith  "
+          },
+          {
+            "id": "s5",
+            "action": "fill",
+            "targetDescription": "Enter Company with spaces",
+            "screenName": "LeadNewPage",
+            "pageObjectMethod": "fillCompany",
+            "value": "  ABC Technologies  "
+          },
+          {
+            "id": "s6",
+            "action": "tap",
+            "targetDescription": "Save Lead",
+            "screenName": "LeadNewPage",
+            "pageObjectMethod": "clickSaveEdit"
+          },
+          {
+            "id": "s7",
+            "action": "assertVisible",
+            "targetDescription": "Redirected to Lead record",
+            "screenName": "LeadRecordPage",
+            "pageObjectMethod": "expectRecordHeaderTitleVisible"
+          },
+          {
+            "id": "s8",
+            "action": "assertContainsText",
+            "targetDescription": "Default status applied",
+            "screenName": "LeadRecordPage",
+            "pageObjectMethod": "expectLeadStatusContainsText",
+            "assertion": "Open - Not Contacted"
+          }
+        ],
+        "tags": [
+          "@edgecase",
+          "@regression"
+        ]
+      },
+      {
+        "id": "5945c7b3-c3db-42de-b6f5-56dcc5954e73",
+        "title": "Script tag in Company does not prevent save and default status is applied",
+        "priority": "P1",
+        "platforms": [
+          "chrome"
+        ],
+        "preconditions": [],
+        "steps": [
+          {
+            "id": "s1",
+            "action": "openUrl",
+            "targetDescription": "Open app home",
+            "value": "/"
+          },
+          {
+            "id": "s2",
+            "action": "tap",
+            "targetDescription": "Go to Leads tab",
+            "screenName": "HomePage",
+            "pageObjectMethod": "clickLeads"
+          },
+          {
+            "id": "s3",
+            "action": "tap",
+            "targetDescription": "Click New",
+            "screenName": "LeadPipelineInspectionPage",
+            "pageObjectMethod": "clickNew"
+          },
+          {
+            "id": "s4",
+            "action": "fill",
+            "targetDescription": "Enter Last Name",
+            "screenName": "LeadNewPage",
+            "pageObjectMethod": "fillLastName",
+            "value": "Tester"
+          },
+          {
+            "id": "s5",
+            "action": "fill",
+            "targetDescription": "Enter script tag in Company",
+            "screenName": "LeadNewPage",
+            "pageObjectMethod": "fillCompany",
+            "value": "<script>alert(1)</script>"
+          },
+          {
+            "id": "s6",
+            "action": "tap",
+            "targetDescription": "Save Lead",
+            "screenName": "LeadNewPage",
+            "pageObjectMethod": "clickSaveEdit"
+          },
+          {
+            "id": "s7",
+            "action": "assertVisible",
+            "targetDescription": "Redirected to Lead record",
+            "screenName": "LeadRecordPage",
+            "pageObjectMethod": "expectRecordHeaderTitleVisible"
+          },
+          {
+            "id": "s8",
+            "action": "assertContainsText",
+            "targetDescription": "Default status applied",
+            "screenName": "LeadRecordPage",
+            "pageObjectMethod": "expectLeadStatusContainsText",
+            "assertion": "Open - Not Contacted"
+          }
+        ],
+        "tags": [
+          "@edgecase",
+          "@regression"
+        ]
+      }
+    ]
+  }
+}

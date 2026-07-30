@@ -1,0 +1,62 @@
+{
+  "id": "95888669-6a7b-4f3d-9cae-1472f41f825a",
+  "testPlanId": "1bd3181f-6807-410c-9916-8c6c6b4ab2c9",
+  "requirementId": "6981de5b-d86a-4122-8612-3587f2774a26",
+  "suiteName": "US-001 — Create Lead",
+  "case": {
+    "id": "95888669-6a7b-4f3d-9cae-1472f41f825a",
+    "title": "Open New Lead form — mandatory fields and Save button visible",
+    "priority": "P1",
+    "platforms": [
+      "chrome"
+    ],
+    "preconditions": [],
+    "steps": [
+      {
+        "id": "s1",
+        "action": "openUrl",
+        "targetDescription": "Open Salesforce org base URL",
+        "value": "https://orgfarm-cdb7bbd1fc-dev-ed.develop.my.salesforce.com"
+      },
+      {
+        "id": "s2",
+        "action": "tap",
+        "targetDescription": "Navigate to Leads tab from Home",
+        "screenName": "HomePage",
+        "pageObjectMethod": "clickLeads"
+      },
+      {
+        "id": "s3",
+        "action": "tap",
+        "targetDescription": "Click New to open New Lead form",
+        "screenName": "LeadPipelineInspectionPage",
+        "pageObjectMethod": "clickNew"
+      },
+      {
+        "id": "s4",
+        "action": "assertVisible",
+        "targetDescription": "Verify Last Name field is visible (mandatory)",
+        "screenName": "LeadNewPage",
+        "pageObjectMethod": "expectLastNameVisible"
+      },
+      {
+        "id": "s5",
+        "action": "assertVisible",
+        "targetDescription": "Verify Company field is visible (mandatory)",
+        "screenName": "LeadNewPage",
+        "pageObjectMethod": "expectCompanyVisible"
+      },
+      {
+        "id": "s6",
+        "action": "assertVisible",
+        "targetDescription": "Verify Save button is visible",
+        "screenName": "LeadNewPage",
+        "pageObjectMethod": "expectSaveEditVisible"
+      }
+    ],
+    "tags": [
+      "@functional",
+      "@regression"
+    ]
+  }
+}

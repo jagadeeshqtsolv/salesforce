@@ -1,0 +1,79 @@
+{
+  "id": "354c968f-5892-4a8d-9ad8-07812f973229",
+  "testPlanId": "d7bb61af-f025-45ed-b8d3-8b6fc053f5ea",
+  "requirementId": "b29d5d27-2fbc-4516-a096-4e6d566026b4",
+  "suiteName": "[SCRUM-6] US-001 — Create Lead — Edge Cases",
+  "case": {
+    "id": "354c968f-5892-4a8d-9ad8-07812f973229",
+    "title": "Create Lead with minimal valid lengths (1-char Last Name and Company)",
+    "priority": "P0",
+    "platforms": [
+      "chrome"
+    ],
+    "preconditions": [],
+    "steps": [
+      {
+        "id": "s1",
+        "action": "openUrl",
+        "targetDescription": "Open app home",
+        "value": "/"
+      },
+      {
+        "id": "s2",
+        "action": "tap",
+        "targetDescription": "Go to Leads tab",
+        "screenName": "HomePage",
+        "pageObjectMethod": "clickLeads"
+      },
+      {
+        "id": "s3",
+        "action": "tap",
+        "targetDescription": "Click New",
+        "screenName": "LeadPipelineInspectionPage",
+        "pageObjectMethod": "clickNew"
+      },
+      {
+        "id": "s4",
+        "action": "fill",
+        "targetDescription": "Enter 1-char Last Name",
+        "screenName": "LeadNewPage",
+        "pageObjectMethod": "fillLastName",
+        "value": "S"
+      },
+      {
+        "id": "s5",
+        "action": "fill",
+        "targetDescription": "Enter 1-char Company",
+        "screenName": "LeadNewPage",
+        "pageObjectMethod": "fillCompany",
+        "value": "A"
+      },
+      {
+        "id": "s6",
+        "action": "tap",
+        "targetDescription": "Save Lead",
+        "screenName": "LeadNewPage",
+        "pageObjectMethod": "clickSaveEdit"
+      },
+      {
+        "id": "s7",
+        "action": "assertVisible",
+        "targetDescription": "Redirected to Lead record",
+        "screenName": "LeadRecordPage",
+        "pageObjectMethod": "expectRecordHeaderTitleVisible"
+      },
+      {
+        "id": "s8",
+        "action": "assertContainsText",
+        "targetDescription": "Default status applied",
+        "screenName": "LeadRecordPage",
+        "pageObjectMethod": "expectLeadStatusContainsText",
+        "assertion": "Open - Not Contacted"
+      }
+    ],
+    "tags": [
+      "@edgecase",
+      "@regression"
+    ]
+  }
+}

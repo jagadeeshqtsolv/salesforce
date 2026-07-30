@@ -1,0 +1,93 @@
+{
+  "id": "4b7ea150-4eb4-4d40-8e0f-6ae37951a74a",
+  "testPlanId": "1bd3181f-6807-410c-9916-8c6c6b4ab2c9",
+  "requirementId": "6981de5b-d86a-4122-8612-3587f2774a26",
+  "suiteName": "US-001 — Create Lead",
+  "case": {
+    "id": "4b7ea150-4eb4-4d40-8e0f-6ae37951a74a",
+    "title": "Create Lead with mandatory fields — verify default status and redirect",
+    "priority": "P0",
+    "platforms": [
+      "chrome"
+    ],
+    "preconditions": [],
+    "steps": [
+      {
+        "id": "s1",
+        "action": "openUrl",
+        "targetDescription": "Open Salesforce org base URL",
+        "value": "https://orgfarm-cdb7bbd1fc-dev-ed.develop.my.salesforce.com"
+      },
+      {
+        "id": "s2",
+        "action": "tap",
+        "targetDescription": "Navigate to Leads tab from Home",
+        "screenName": "HomePage",
+        "pageObjectMethod": "clickLeads"
+      },
+      {
+        "id": "s3",
+        "action": "assertVisible",
+        "targetDescription": "Verify Leads list view is visible (New button present)",
+        "screenName": "LeadPipelineInspectionPage",
+        "pageObjectMethod": "expectNewVisible"
+      },
+      {
+        "id": "s4",
+        "action": "tap",
+        "targetDescription": "Click New to open New Lead form",
+        "screenName": "LeadPipelineInspectionPage",
+        "pageObjectMethod": "clickNew"
+      },
+      {
+        "id": "s5",
+        "action": "assertVisible",
+        "targetDescription": "Verify Last Name field is visible on New Lead form",
+        "screenName": "LeadNewPage",
+        "pageObjectMethod": "expectLastNameVisible"
+      },
+      {
+        "id": "s6",
+        "action": "fill",
+        "targetDescription": "Enter Last Name (mandatory)",
+        "screenName": "LeadNewPage",
+        "pageObjectMethod": "fillLastName",
+        "value": "Smith"
+      },
+      {
+        "id": "s7",
+        "action": "fill",
+        "targetDescription": "Enter Company (mandatory)",
+        "screenName": "LeadNewPage",
+        "pageObjectMethod": "fillCompany",
+        "value": "ABC Technologies"
+      },
+      {
+        "id": "s8",
+        "action": "tap",
+        "targetDescription": "Save Lead",
+        "screenName": "LeadNewPage",
+        "pageObjectMethod": "clickSaveEdit"
+      },
+      {
+        "id": "s9",
+        "action": "assertContainsText",
+        "targetDescription": "Verify redirected to Lead record page with header showing lead name",
+        "locatorHint": "records-lwc-detail-panel h1.slds-page-header__title",
+        "assertion": "Smith"
+      },
+      {
+        "id": "s10",
+        "action": "assertContainsText",
+        "targetDescription": "Verify default Lead Status is 'Open - Not Contacted' on record page",
+        "locatorHint": "[data-field='Status'], lightning-formatted-text[title='Status'], .record-layout .slds-grid .slds-truncate[title='Open - Not Contacted']",
+        "assertion": "Open - Not Contacted"
+      }
+    ],
+    "tags": [
+      "@smoke",
+      "@functional",
+      "@regression"
+    ]
+  }
+}

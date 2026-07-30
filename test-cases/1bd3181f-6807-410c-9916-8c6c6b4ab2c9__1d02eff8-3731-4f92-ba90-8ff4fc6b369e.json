@@ -1,0 +1,84 @@
+{
+  "id": "1d02eff8-3731-4f92-ba90-8ff4fc6b369e",
+  "testPlanId": "1bd3181f-6807-410c-9916-8c6c6b4ab2c9",
+  "requirementId": "6981de5b-d86a-4122-8612-3587f2774a26",
+  "suiteName": "US-001 — Create Lead",
+  "case": {
+    "id": "1d02eff8-3731-4f92-ba90-8ff4fc6b369e",
+    "title": "Validation error when Company is blank",
+    "priority": "P1",
+    "platforms": [
+      "chrome"
+    ],
+    "preconditions": [],
+    "steps": [
+      {
+        "id": "s1",
+        "action": "openUrl",
+        "targetDescription": "Open Salesforce org base URL",
+        "value": "https://orgfarm-cdb7bbd1fc-dev-ed.develop.my.salesforce.com"
+      },
+      {
+        "id": "s2",
+        "action": "tap",
+        "targetDescription": "Navigate to Leads tab from Home",
+        "screenName": "HomePage",
+        "pageObjectMethod": "clickLeads"
+      },
+      {
+        "id": "s3",
+        "action": "tap",
+        "targetDescription": "Click New to open New Lead form",
+        "screenName": "LeadPipelineInspectionPage",
+        "pageObjectMethod": "clickNew"
+      },
+      {
+        "id": "s4",
+        "action": "fill",
+        "targetDescription": "Enter Last Name (mandatory) and leave Company blank",
+        "screenName": "LeadNewPage",
+        "pageObjectMethod": "fillLastName",
+        "value": "Smith"
+      },
+      {
+        "id": "s5",
+        "action": "clear",
+        "targetDescription": "Ensure Company is blank",
+        "screenName": "LeadNewPage",
+        "pageObjectMethod": "clearCompany"
+      },
+      {
+        "id": "s6",
+        "action": "tap",
+        "targetDescription": "Attempt to Save with missing Company",
+        "screenName": "LeadNewPage",
+        "pageObjectMethod": "clickSaveEdit"
+      },
+      {
+        "id": "s7",
+        "action": "assertContainsText",
+        "targetDescription": "Verify error banner is shown",
+        "locatorHint": "div[role='alert'], div[role='alertdialog']",
+        "assertion": "Review the errors"
+      },
+      {
+        "id": "s8",
+        "action": "assertContainsText",
+        "targetDescription": "Verify Company field shows required error",
+        "locatorHint": "[aria-label='Company'] ~ .slds-form-element__help, [name='Company'] ~ .slds-form-element__help",
+        "assertion": "Complete this field"
+      },
+      {
+        "id": "s9",
+        "action": "assertVisible",
+        "targetDescription": "Confirm still on New Lead form",
+        "screenName": "LeadNewPage",
+        "pageObjectMethod": "expectCompanyVisible"
+      }
+    ],
+    "tags": [
+      "@negative",
+      "@regression"
+    ]
+  }
+}
