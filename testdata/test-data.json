@@ -1,1 +1,18 @@
-{}
+{
+  "createLeadWithMandatoryFieldsVerifyDefaultStatusAndRedirect": {
+    "enterLastNameMandatory": "Smith",
+    "enterCompanyMandatory": "ABC Technologies"
+  },
+  "createLeadWithOptionalFieldsValuesPersistOnRecordPage": {
+    "enterFirstNameOptional": "John",
+    "enterLastNameMandatory": "Smith",
+    "enterCompanyMandatory": "ABC Technologies",
+    "enterPhoneOptional": "9989876789"
+  },
+  "validationErrorWhenLastNameIsBlank": {
+    "enterCompanyMandatoryAndLeaveLastNameBlank": "ABC Technologies"
+  },
+  "validationErrorWhenCompanyIsBlank": {
+    "enterLastNameMandatoryAndLeaveCompanyBlank": "Smith"
+  }
+}
